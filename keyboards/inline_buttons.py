@@ -7,7 +7,12 @@ async def start_keyboard():
         "Start Questionnaire !",
         callback_data="start_questionnaire"
     )
+    check_count_button = InlineKeyboardButton(
+        "Check Ban-Count",
+        callback_data="start_check_ban_count"
+    )
     markup.add(questionnaire_button)
+    markup.add(check_count_button)
     return markup
 
 
