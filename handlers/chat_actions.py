@@ -19,13 +19,13 @@ async def chat_messages(message: types.Message):
             )
             print(potential)
             if potential:
-                #if potential['count'] >= 3:
-                #    await bot.ban_chat_member(
-                #        chat_id=message.chat.id,
-                #        user_id=message.from_user.id,
-                #        until_date=datetime.datetime.now() + datetime.timedelta(minutes=5)
-                #    )
-                #    return
+                if potential['count'] >= 3:
+                    await bot.ban_chat_member(
+                        chat_id=message.chat.id,
+                        user_id=message.from_user.id,
+                        until_date=datetime.datetime.now() + datetime.timedelta(minutes=5)
+                    )
+                    return
                 datab.sql_update_ban_count(
                     tg_id=message.from_user.id
                 )
@@ -33,8 +33,7 @@ async def chat_messages(message: types.Message):
                     chat_id=message.chat.id,
                     text=BAN_USER_TEXT.format(
                         name=message.from_user.username,
-                        # potential['count'] + 1
-                        count=None
+                        count=potential['count'] + 1
                     )
                 )
             elif not potential:
