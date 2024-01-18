@@ -70,9 +70,7 @@ async def check_ban_count(message: types.Message):
         )
 
 
-
 def register_chat_actions_handler(dp: Dispatcher):
     dp.register_message_handler(chat_messages)
     dp.register_callback_query_handler(check_ban_count,
                                        lambda call: call.data == "start_check_ban_count")
-

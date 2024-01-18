@@ -14,3 +14,10 @@ BAN_COUNT_ON = "User: {name}\n" \
 
 BAN_COUNT_OFF = "User: {name}\n" \
                 "You are NOT in Ban_user_table"
+
+PROFILE_TEXT = "Nickname: {nickname}\n" \
+               "Bio: {bio}\n" \
+               "Age: {age}\n" \
+               "Gender: {gender}\n" \
+               "Hobby: {hobby}\n" \
+               "Zodiac sign: {zodiac_sign}\n"

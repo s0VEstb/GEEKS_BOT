@@ -11,8 +11,13 @@ async def start_keyboard():
         "Check Ban-Count",
         callback_data="start_check_ban_count"
     )
+    registration_button = InlineKeyboardButton(
+        "Registration !",
+        callback_data="start_registration"
+    )
     markup.add(questionnaire_button)
     markup.add(check_count_button)
+    markup.add(registration_button)
     return markup
 
 
@@ -29,6 +34,7 @@ async def human_answers():
     markup.add(human_yes_button)
     markup.add(human_no_button)
     return markup
+
 
 async def second_question():
     markup = InlineKeyboardMarkup()
