@@ -57,3 +57,8 @@ class Database:
             (None, tg_id, nickname, bio, age, gender, hobby, zodiac_sign, photo,)
         )
         self.connection.commit()
+
+    def sql_select_id_profile(self, tg):
+        self.cursor.execute(sql_queries.SELECT_PROFILE_USER_QUERY, (tg,))
+        row = self.cursor.fetchone()
+        return row

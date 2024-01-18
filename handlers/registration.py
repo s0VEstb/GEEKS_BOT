@@ -19,12 +19,20 @@ class RegisterStates(StatesGroup):
     photo = State()
 
 
-async def register_start(message: types.Message):
-    await bot.send_message(
-        chat_id=message.from_user.id,
-        text="Send your Nickname"
-    )
-    await RegisterStates.nickname.set()
+async def register_start(call: types.CallbackQuery):
+    datab = Database()
+    if datab.sql_select_id_profile(
+            tg=call.from_user.id):
+        await bot.send_message(
+            chat_id=call.from_user.id,
+            text='You have already registered'
+        )
+    else:
+        await bot.send_message(
+            chat_id=call.from_user.id,
+            text="Send your Nickname"
+        )
+        await RegisterStates.nickname.set()
 
 
 async def load_nickname(message: types.Message,
@@ -119,22 +127,22 @@ async def load_zodiac_sign(message: types.Message,
 
 
 async def load_photo(message: types.Message,
-                           state: FSMContext):
+                     state: FSMContext):
     db = Database()
     path = await message.photo[-1].download(
         destination_dir=MEDIA_DEST
     )
     async with state.proxy() as data:
-    #    db.sql_insert_profile(
-    #        tg_id=message.from_user.id,
-    #        nickname=data["nickname"],
-    #        bio=data["bio"],
-    #        age=data["age"],
-    #        gender=data["gender"],
-    #        hobby=data["hobby"],
-    #        zodiac_sign=data["zodiac_sign"],
-    #        photo=path.name,
-    #    )
+        db.sql_insert_profile(
+            tg_id=message.from_user.id,
+            nickname=data["nickname"],
+            bio=data["bio"],
+            age=data["age"],
+            gender=data["gender"],
+            hobby=data["hobby"],
+            zodiac_sign=data["zodiac_sign"],
+            photo=path.name,
+        )
 
         with open(path.name, "rb") as photo:
             await bot.send_photo(
@@ -154,6 +162,18 @@ async def load_photo(message: types.Message,
             text="You have successfully registered\n"
                  "Congratulations!"
         )
+
+
+#async def check_prof(call: types.CallbackQuery):
+#    datab = Database()
+#    if datab.sql_select_id_profile(
+#
+#    else:
+#        await bot.send_message(
+#            chat_id=call.from_user.id,
+#            text="You have not registered("
+#        )
+
 
 
 
@@ -197,3 +217,6 @@ def register_registration_handlers(dp: Dispatcher):
         state=RegisterStates.photo,
         content_types=types.ContentTypes.PHOTO
     )
+    #dp.register_callback_query_handler(
+    #    check_prof,lambda call: call.data == "check_profile"
+    #)

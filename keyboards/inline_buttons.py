@@ -15,9 +15,14 @@ async def start_keyboard():
         "Registration !",
         callback_data="start_registration"
     )
+    #profile_button = InlineKeyboardButton(
+    #    "Your Profile !",
+    #    callback_data="check_profile"
+    #)
     markup.add(questionnaire_button)
     markup.add(check_count_button)
     markup.add(registration_button)
+    #markup.add(profile_button)
     return markup
 
 
