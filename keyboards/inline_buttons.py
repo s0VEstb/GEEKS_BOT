@@ -15,14 +15,34 @@ async def start_keyboard():
         "Registration !",
         callback_data="start_registration"
     )
-    #profile_button = InlineKeyboardButton(
-    #    "Your Profile !",
-    #    callback_data="check_profile"
-    #)
+    profile_button = InlineKeyboardButton(
+        "Profile !",
+        callback_data="my_profile"
+    )
+    view_profile_button = InlineKeyboardButton(
+        "View Profiles",
+        callback_data="view_profiles"
+    )
     markup.add(questionnaire_button)
     markup.add(check_count_button)
     markup.add(registration_button)
-    #markup.add(profile_button)
+    markup.add(profile_button)
+    markup.add(view_profile_button)
+    return markup
+
+
+async def like_dislike(owner):
+    markup = InlineKeyboardMarkup()
+    like_button = InlineKeyboardButton(
+        "Like 👍",
+        callback_data=f"like_{owner}"
+    )
+    dislike_button = InlineKeyboardButton(
+        "Dislike 👎",
+        callback_data=f"dis_{owner}"
+    )
+    markup.add(like_button)
+    markup.add(dislike_button)
     return markup
 
 

@@ -88,15 +88,24 @@ async def load_age(message: types.Message,
 
 async def load_gender(message: types.Message,
                       state: FSMContext):
-    async with state.proxy() as data:
-        data['gender'] = message.text
-        print(data)
+    genders = ['male', 'female']
+    if message.text.lower() in genders:
+        async with state.proxy() as data:
+            data['gender'] = message.text
+            print(data)
 
-    await bot.send_message(
-        chat_id=message.from_user.id,
-        text="what is your hobby?"
-    )
-    await RegisterStates.next()
+        await bot.send_message(
+            chat_id=message.from_user.id,
+            text="what is your hobby?"
+        )
+        await RegisterStates.next()
+    else:
+        await bot.send_message(
+            chat_id=message.from_user.id,
+            text="ONLY Male and Female\n"
+                 "Registration FAILED!"
+        )
+        await state.finish()
 
 
 async def load_hobby(message: types.Message,
@@ -164,18 +173,6 @@ async def load_photo(message: types.Message,
         )
 
 
-#async def check_prof(call: types.CallbackQuery):
-#    datab = Database()
-#    if datab.sql_select_id_profile(
-#
-#    else:
-#        await bot.send_message(
-#            chat_id=call.from_user.id,
-#            text="You have not registered("
-#        )
-
-
-
 
 def register_registration_handlers(dp: Dispatcher):
     dp.register_callback_query_handler(
@@ -217,6 +214,3 @@ def register_registration_handlers(dp: Dispatcher):
         state=RegisterStates.photo,
         content_types=types.ContentTypes.PHOTO
     )
-    #dp.register_callback_query_handler(
-    #    check_prof,lambda call: call.data == "check_profile"
-    #)
