@@ -9,6 +9,10 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 
 
+
+
+
+
 class RegisterStates(StatesGroup):
     nickname = State()
     bio = State()
@@ -21,18 +25,12 @@ class RegisterStates(StatesGroup):
 
 async def register_start(call: types.CallbackQuery):
     datab = Database()
-    if datab.sql_select_id_profile(
-            tg=call.from_user.id):
-        await bot.send_message(
-            chat_id=call.from_user.id,
-            text='You have already registered'
-        )
-    else:
-        await bot.send_message(
-            chat_id=call.from_user.id,
-            text="Send your Nickname"
-        )
-        await RegisterStates.nickname.set()
+    datab.sql_delete_profile(call.from_user.id)
+    await bot.send_message(
+        chat_id=call.from_user.id,
+        text="Send your Nickname"
+    )
+    await RegisterStates.nickname.set()
 
 
 async def load_nickname(message: types.Message,
@@ -168,7 +166,7 @@ async def load_photo(message: types.Message,
             )
         await bot.send_message(
             chat_id=message.from_user.id,
-            text="You have successfully registered\n"
+            text="You have successfully updated\n"
                  "Congratulations!"
         )
     await state.finish()
@@ -178,7 +176,7 @@ async def load_photo(message: types.Message,
 def register_registration_handlers(dp: Dispatcher):
     dp.register_callback_query_handler(
         register_start,
-        lambda call: call.data == "start_registration"
+        lambda call: call.data == "update"
     )
     dp.register_message_handler(
         load_nickname,

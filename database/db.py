@@ -42,8 +42,6 @@ class Database:
             (tg_id,)
         ).fetchone()
 
-
-
     def sql_update_ban_count(self, tg_id):
         self.cursor.execute(
             sql_queries.UPDATE_BAN_USER_TABLE_QUERY,
@@ -94,7 +92,6 @@ class Database:
         )
         self.connection.commit()
 
-
     def sql_select_all_profiles(self, owner):
         self.cursor.row_factory = lambda cursor, row: {
             'id': row[0],
@@ -111,3 +108,17 @@ class Database:
             sql_queries.FILTER_LIKER_LEFT_JOIN_PROFILE_QUERY,
             (owner, owner, owner,)
         ).fetchall()
+
+    def sql_select_complainted_profile(self, username):
+        self.cursor.execute(sql_queries.SELECT_COMPLAINTS_QUERY, (username,))
+        un = self.cursor.fetchone()
+        return un
+
+    def sql_select_id_from_username_profile(self, username):
+        self.cursor.execute(sql_queries.SELECT_TG_ID_USERNAME_QUERY, (username,))
+        usernam = self.cursor.fetchone()
+        return usernam
+
+    def sql_delete_profile(self, tg_id):
+        self.cursor.execute(sql_queries.DELETE_PROFILE_QUERY, (tg_id,))
+        self.connection.commit()

@@ -23,11 +23,31 @@ async def start_keyboard():
         "View Profiles",
         callback_data="view_profiles"
     )
+    complaint_button = InlineKeyboardButton(
+        "Complaint",
+        callback_data="complaint"
+    )
     markup.add(questionnaire_button)
     markup.add(check_count_button)
     markup.add(registration_button)
     markup.add(profile_button)
     markup.add(view_profile_button)
+    markup.add(complaint_button)
+    return markup
+
+
+async def delete_and_update():
+    markup = InlineKeyboardMarkup()
+    update_button = InlineKeyboardButton(
+        "Update Profile",
+        callback_data="update"
+    )
+    delete_button = InlineKeyboardButton(
+        "Delete Profile",
+        callback_data="delete"
+    )
+    markup.add(update_button)
+    markup.add(delete_button)
     return markup
 
 

@@ -13,7 +13,6 @@ async def my_profile_call(call: types.CallbackQuery):
     profile = datab.sql_select_profile(
         tg_id=call.from_user.id
     )
-    print(profile)
     if profile:
         with open(profile['photo'], "rb") as photo:
             await bot.send_photo(
@@ -27,12 +26,22 @@ async def my_profile_call(call: types.CallbackQuery):
                     hobby=profile["hobby"],
                     zodiac_sign=profile["zodiac_sign"],
                 ),
+                reply_markup=await inline_buttons.delete_and_update()
             )
     else:
         await bot.send_message(
             chat_id=call.from_user.id,
             text="You didn't registered, please register!"
         )
+
+
+async def delete_profile(call: types.CallbackQuery):
+    datab = Database()
+    datab.sql_delete_profile(call.from_user.id)
+    await bot.send_message(
+        chat_id=call.from_user.id,
+        text="Profile has been deleted"
+    )
 
 
 async def random_filter_profile_call(call: types.CallbackQuery):
@@ -115,4 +124,8 @@ def register_profile_handler(dp: Dispatcher):
     dp.register_callback_query_handler(
         detect_dislike_call,
         lambda call: "dis_" in call.data
+    )
+    dp.register_callback_query_handler(
+        delete_profile,
+        lambda call: call.data == "delete"
     )
