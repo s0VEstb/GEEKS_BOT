@@ -2,6 +2,7 @@ import re
 import sqlite3
 from aiogram import types, Dispatcher, Bot
 from config import bot, MEDIA_DEST
+from database import db
 from database.db import Database
 from const import START_MENU, PROFILE_TEXT
 from keyboards import inline_buttons
@@ -129,3 +130,4 @@ def register_profile_handler(dp: Dispatcher):
         delete_profile,
         lambda call: call.data == "delete"
     )
+

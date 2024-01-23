@@ -42,6 +42,35 @@ async def username_outputs(message: types.Message, state: FSMContext):
             text="There is no such kind of user in my db"
         )
     await state.finish()
+    compl_user = datab.sql_select_complaint_user(
+        tg_id=message.from_user.id
+    )
+    print(0)
+    if compl_user:
+        print(compl_user['bad_count'])
+        if compl_user['bad_count'] == 3:
+            await bot.send_message(
+                chat_id=comp_tg_id[0],
+                text="Yoy have 3 or more counts, we will write about it soon."
+            )
+        datab.sql_update_bad_count(
+            tg_id=message.from_user.id
+
+        )
+    elif not compl_user:
+        print(comp_tg_id[0])
+        try:
+            datab.sql_insert_bad_user(
+                complained_user=message.from_user.id,
+                bad_user=comp_tg_id[0],
+                reason="",
+            )
+        except sqlite3.IntegrityError:
+            await bot.send_message(
+                chat_id=message.from_user.id,
+                text="Error"
+            )
+
 
 
 def register_complaints_handler(dp: Dispatcher):
@@ -50,6 +79,8 @@ def register_complaints_handler(dp: Dispatcher):
     dp.register_message_handler(username_outputs,
                                 state=ComplaintsStates.username,
                                 content_types=["text"])
+
+
 
 
 

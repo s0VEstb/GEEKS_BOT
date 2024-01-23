@@ -9,10 +9,6 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 
 
-
-
-
-
 class RegisterStates(StatesGroup):
     nickname = State()
     bio = State()
@@ -170,7 +166,6 @@ async def load_photo(message: types.Message,
                  "Congratulations!"
         )
     await state.finish()
-
 
 
 def register_registration_handlers(dp: Dispatcher):
