@@ -21,3 +21,9 @@ PROFILE_TEXT = "Nickname: {nickname}\n" \
                "Gender: {gender}\n" \
                "Hobby: {hobby}\n" \
                "Zodiac sign: {zodiac_sign}\n"
+
+
+REFERRENS_MENU_TEXT = ("Refarral Menu:\n"
+                       "Invite your friends to earn Money\n"
+                       "Press button Generate Link\n"
+                       "Total Referrals: {total_referrals}\n")

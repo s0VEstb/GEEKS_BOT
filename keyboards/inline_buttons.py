@@ -27,12 +27,17 @@ async def start_keyboard():
         "Complaint",
         callback_data="complaint"
     )
+    referral_button = InlineKeyboardButton(
+        "Referrals",
+        callback_data="referral"
+    )
     markup.add(questionnaire_button)
     markup.add(check_count_button)
     markup.add(registration_button)
     markup.add(profile_button)
     markup.add(view_profile_button)
     markup.add(complaint_button)
+    markup.add(referral_button)
     return markup
 
 
@@ -128,4 +133,23 @@ async def last_answers():
     )
     markup.add(programing_yes_button)
     markup.add(programing_no_button)
+    return markup
+
+async def balance_and_referral():
+    markup = InlineKeyboardMarkup()
+    link_button = InlineKeyboardButton(
+        "Generate Link",
+        callback_data="link"
+    )
+    referral_button = InlineKeyboardButton(
+        "Your Referrals",
+        callback_data="your_referrals"
+    )
+    balance_button = InlineKeyboardButton(
+        "Balance",
+        callback_data="balance"
+    )
+    markup.add(link_button)
+    markup.add(referral_button)
+    markup.add(balance_button)
     return markup

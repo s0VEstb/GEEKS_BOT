@@ -16,12 +16,16 @@ class Database:
         self.connection.execute(sql_queries.CREATE_LIKE_TABLE_QUERY)
         self.connection.execute(sql_queries.CREATE_DISLIKE_TABLE_QUERY)
         self.connection.execute(sql_queries.CREATE_USER_COMPLAINTS_QUERY)
+        self.connection.execute(sql_queries.CREATE_REFERRAL_USERS)
+
+        #self.connection.execute(sql_queries.ALTER_USER_TABLE_QUERY)
+        #self.connection.execute(sql_queries.ALTER_USER_TABLE_QUERY_V2)
         self.connection.commit()
 
     def sql_insert_user(self, tg_id, username, first_name, last_name):
         self.cursor.execute(
             sql_queries.INSERT_USER_QUERY,
-            (None, tg_id, username, first_name, last_name,)
+            (None, tg_id, username, first_name, last_name, None, 0)
         )
         self.connection.commit()
 
@@ -151,3 +155,75 @@ class Database:
             (None, complained_user, bad_user, reason, 1,)
         )
         self.connection.commit()
+
+    def sql_select_referrals_menu(self, owner):
+        self.cursor.row_factory = lambda cursor, row: {
+            'balance': row[0],
+            'total_referrals': row[1],
+        }
+        return self.cursor.execute(
+            sql_queries.SELECT_REFERRAL_USER_QUERY,
+            (owner,)
+        ).fetchone()
+
+    def sql_select_user(self, tg_id):
+        self.cursor.row_factory = lambda cursor, row: {
+            'id': row[0],
+            'telegram_id': row[1],
+            'username': row[2],
+            'first_name': row[3],
+            'last_name': row[4],
+            'reference_link': row[5],
+            'balance': row[6],
+
+        }
+        return self.cursor.execute(
+            sql_queries.SELECT_USER_QUERY,
+            (tg_id,)
+        ).fetchone()
+
+    def sql_update_link(self, link, tg_id):
+        self.cursor.execute(
+            sql_queries.UPDATE_USER_LINK_TABLE_QUERY,
+            (link, tg_id,)
+        )
+        self.connection.commit()
+
+
+    def sql_select_user_by_link(self, link):
+        self.cursor.row_factory = lambda cursor, row: {
+            'id': row[0],
+            'telegram_id': row[1],
+            'username': row[2],
+            'first_name': row[3],
+            'last_name': row[4],
+            'reference_link': row[5],
+            'balance': row[6],
+
+        }
+        return self.cursor.execute(
+            sql_queries.SELECT_USER_BY_LINK_QUERY,
+            (link,)
+        ).fetchone()
+
+    def sql_insert_referral(self, owner, referral):
+        self.cursor.execute(
+            sql_queries.INSERT_REFERRAL_QUERY,
+            (None, owner, referral,)
+        )
+        self.connection.commit()
+
+
+    def sql_update_balance(self, owner):
+        self.cursor.execute(
+            sql_queries.UPDATE_USER_BALANCE_QUERY,
+            (owner,)
+        )
+        self.connection.commit()
+
+    def sql_select_referrals_button(self, tg_id):
+        return self.cursor.execute(
+            sql_queries.SELECT_REFERRALS_BUTTON_QUERY,
+            (tg_id,)
+        ).fetchall()
+

@@ -5,7 +5,8 @@ from handlers import (start,
                       chat_actions,
                       registration,
                       profile,
-                      complaints, update
+                      complaints, update,
+                      referrals, errors
                       )
 
 from database import db
@@ -17,11 +18,13 @@ async def on_startup(_):
 
 
 start.register_start_handlers(dp=dp)
+errors.register_error_handlers(dp=dp)
 questionnaire.register_questionnaire_handlers(dp=dp)
 profile.register_profile_handler(dp=dp)
 registration.register_registration_handlers(dp=dp)
 update.register_registration_handlers(dp=dp)
 complaints.register_complaints_handler(dp=dp)
+referrals.register_reference_handler(dp=dp)
 chat_actions.register_chat_actions_handler(dp=dp)
 
 

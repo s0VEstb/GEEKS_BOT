@@ -58,7 +58,6 @@ async def username_outputs(message: types.Message, state: FSMContext):
 
         )
     elif not compl_user:
-        print(comp_tg_id[0])
         try:
             datab.sql_insert_bad_user(
                 complained_user=message.from_user.id,
