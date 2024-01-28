@@ -1,11 +1,13 @@
 import sqlite3
 from aiogram import types, Dispatcher
+from aiogram.dispatcher import FSMContext
 from aiogram.utils.deep_linking import _create_link
 
 from config import bot, MEDIA_DEST
 from database import db
 from keyboards import inline_buttons
 from const import START_MENU
+from scrapping.anime_scrapper import AnimeScrapper
 
 
 async def start_button(message: types.Message):
@@ -53,6 +55,20 @@ async def start_button(message: types.Message):
             reply_markup=await inline_buttons.start_keyboard()
     )
 
+async def anime_call(call: types.CallbackQuery):
+    datab = db.Database()
+    scraper = AnimeScrapper()
+    data = scraper.parse_data()
+
+    for link in data[:5]:
+        datab.sql_insert_anime_link(link=link)
+        await bot.send_message(
+            chat_id=call.from_user.id,
+            text=scraper.START_URL + link
+        )
+
 
 def register_start_handlers(dp: Dispatcher):
     dp.register_message_handler(start_button, commands=["start"])
+    dp.register_callback_query_handler(anime_call,
+                                       lambda call: call.data == "anime")

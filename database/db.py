@@ -17,6 +17,7 @@ class Database:
         self.connection.execute(sql_queries.CREATE_DISLIKE_TABLE_QUERY)
         self.connection.execute(sql_queries.CREATE_USER_COMPLAINTS_QUERY)
         self.connection.execute(sql_queries.CREATE_REFERRAL_USERS)
+        self.connection.execute(sql_queries.CREATE_ANIME_TABLE_QUERY)
 
         #self.connection.execute(sql_queries.ALTER_USER_TABLE_QUERY)
         #self.connection.execute(sql_queries.ALTER_USER_TABLE_QUERY_V2)
@@ -226,4 +227,11 @@ class Database:
             sql_queries.SELECT_REFERRALS_BUTTON_QUERY,
             (tg_id,)
         ).fetchall()
+
+    def sql_insert_anime_link(self, link):
+        self.cursor.execute(
+            sql_queries.INSERT_ANIME_QUERY,
+            (None, link,)
+        )
+        self.connection.commit()
 
