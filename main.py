@@ -8,7 +8,7 @@ from handlers import (start,
                       complaints, update,
                       referrals, errors
                       )
-
+from scrapping import async_scrapper
 from database import db
 
 
@@ -21,6 +21,7 @@ start.register_start_handlers(dp=dp)
 errors.register_error_handlers(dp=dp)
 questionnaire.register_questionnaire_handlers(dp=dp)
 profile.register_profile_handler(dp=dp)
+async_scrapper.register_anime_scrapper(dp=dp)
 registration.register_registration_handlers(dp=dp)
 update.register_registration_handlers(dp=dp)
 complaints.register_complaints_handler(dp=dp)
