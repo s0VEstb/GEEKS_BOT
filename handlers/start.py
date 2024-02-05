@@ -7,7 +7,7 @@ from config import bot, MEDIA_DEST
 from database import db
 from keyboards import inline_buttons
 from const import START_MENU
-from scrapping.anime_scrapper import AnimeScrapper
+#from scrapping.anime_scrapper import AnimeScrapper
 
 
 async def start_button(message: types.Message):
