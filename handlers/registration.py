@@ -1,12 +1,11 @@
 import sqlite3
 from aiogram import types, Dispatcher, Bot
 from config import bot, MEDIA_DEST
-from database import db
 from database.db import Database
-from keyboards import inline_buttons
-from const import START_MENU, PROFILE_TEXT
+from const import PROFILE_TEXT
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
+
 
 
 class RegisterStates(StatesGroup):
