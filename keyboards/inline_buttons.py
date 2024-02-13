@@ -35,6 +35,10 @@ async def start_keyboard():
         "Top-5 Anime",
         callback_data="anime"
     )
+    valentine_button = InlineKeyboardButton(
+        "Valentine",
+        callback_data="valentine"
+    )
     markup.add(questionnaire_button)
     markup.add(check_count_button)
     markup.add(registration_button)
@@ -43,6 +47,7 @@ async def start_keyboard():
     markup.add(complaint_button)
     markup.add(referral_button)
     markup.add(anime_button)
+    markup.add(valentine_button)
     return markup
 
 

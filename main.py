@@ -6,7 +6,7 @@ from handlers import (start,
                       registration,
                       profile,
                       complaints, update,
-                      referrals, errors
+                      referrals, errors, valentine
                       )
 #rom scrapping import async_scrapper
 from database import db
@@ -18,6 +18,7 @@ async def on_startup(_):
 
 
 start.register_start_handlers(dp=dp)
+valentine.register_valentine_handler(dp=dp)
 errors.register_error_handlers(dp=dp)
 questionnaire.register_questionnaire_handlers(dp=dp)
 profile.register_profile_handler(dp=dp)

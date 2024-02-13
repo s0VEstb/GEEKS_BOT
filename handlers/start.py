@@ -2,6 +2,7 @@ import sqlite3
 from aiogram import types, Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.utils.deep_linking import _create_link
+from handlers import valentine
 
 from config import bot, MEDIA_DEST
 from database import db
@@ -52,7 +53,7 @@ async def start_button(message: types.Message):
             caption=START_MENU.format(
                 name=message.from_user.first_name
             ),
-            reply_markup=await inline_buttons.start_keyboard()
+            reply_markup=await valentine.valentine_start()
     )
 
 def register_start_handlers(dp: Dispatcher):
