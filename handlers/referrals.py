@@ -1,14 +1,8 @@
-import sqlite3
-from aiogram import types, Dispatcher, Bot
-from aiogram.types import Update, InlineKeyboardMarkup, InlineKeyboardButton
 
-from config import bot, MEDIA_DEST
-from database import db
+from aiogram import types, Dispatcher
+from config import bot
 from database.db import Database
 from keyboards import inline_buttons
-from const import PROFILE_TEXT
-from aiogram.dispatcher import FSMContext
-from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.utils.deep_linking import _create_link
 import os
 import binascii

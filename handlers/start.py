@@ -53,7 +53,7 @@ async def start_button(message: types.Message):
             caption=START_MENU.format(
                 name=message.from_user.first_name
             ),
-            reply_markup=await valentine.valentine_start()
+            reply_markup=await inline_buttons.start_keyboard()
     )
 
 def register_start_handlers(dp: Dispatcher):

@@ -99,16 +99,16 @@ async def valentine_answers_2():
         "yes ❤️",
         callback_data="1"
     )
-    val_no_button = InlineKeyboardButton(
-        "no (",
-        callback_data="2"
+    val_yes_button_1 = InlineKeyboardButton(
+        "yes ❤️",
+        callback_data="1"
     )
     val_no_button_2 = InlineKeyboardButton(
         "no (",
         callback_data="2"
     )
     markup.add(val_yes_button)
-    markup.add(val_no_button)
+    markup.add(val_yes_button_1)
     markup.add(val_no_button_2)
     return markup
 
@@ -120,21 +120,21 @@ async def valentine_answers_3():
         "yes ❤️",
         callback_data="1"
     )
-    val_no_button = InlineKeyboardButton(
-        "no (",
-        callback_data="3"
+    val_yes_button_1 = InlineKeyboardButton(
+        "yes ❤️",
+        callback_data="1"
     )
-    val_no_button_2 = InlineKeyboardButton(
-        "no (",
-        callback_data="3"
+    val_yes_button_2 = InlineKeyboardButton(
+        "yes ❤️",
+        callback_data="1"
     )
     val_no_button_3 = InlineKeyboardButton(
         "no (",
         callback_data="3"
     )
     markup.add(val_yes_button)
-    markup.add(val_no_button)
-    markup.add(val_no_button_2)
+    markup.add(val_yes_button_1)
+    markup.add(val_yes_button_2)
     markup.add(val_no_button_3)
     return markup
 
@@ -145,26 +145,26 @@ async def valentine_answers_4():
         "yes ❤️",
         callback_data="1"
     )
-    val_no_button = InlineKeyboardButton(
-        "no (",
-        callback_data="4"
+    val_yes_button_1 = InlineKeyboardButton(
+        "yes ❤️",
+        callback_data="1"
     )
-    val_no_button_2 = InlineKeyboardButton(
-        "no (",
-        callback_data="4"
+    val_yes_button_2 = InlineKeyboardButton(
+        "yes ❤️",
+        callback_data="1"
     )
-    val_no_button_3 = InlineKeyboardButton(
-        "no (",
-        callback_data="4"
+    val_yes_button_3 = InlineKeyboardButton(
+        "yes ❤️",
+        callback_data="1"
     )
     val_no_button_4 = InlineKeyboardButton(
         "no (",
         callback_data="4"
     )
     markup.add(val_yes_button)
-    markup.add(val_no_button)
-    markup.add(val_no_button_2)
-    markup.add(val_no_button_3)
+    markup.add(val_yes_button_1)
+    markup.add(val_yes_button_2)
+    markup.add(val_yes_button_3)
     markup.add(val_no_button_4)
     return markup
 
@@ -175,31 +175,31 @@ async def valentine_answers_5():
         "yes ❤️",
         callback_data="1"
     )
-    val_no_button = InlineKeyboardButton(
-        "no (",
-        callback_data="5"
+    val_yes_button_1 = InlineKeyboardButton(
+        "yes ❤️",
+        callback_data="1"
     )
-    val_no_button_2 = InlineKeyboardButton(
-        "no (",
-        callback_data="5"
+    val_yes_button_2 = InlineKeyboardButton(
+        "yes ❤️",
+        callback_data="1"
     )
-    val_no_button_3 = InlineKeyboardButton(
-        "no (",
-        callback_data="5"
+    val_yes_button_3 = InlineKeyboardButton(
+        "yes ❤️",
+        callback_data="1"
     )
-    val_no_button_4 = InlineKeyboardButton(
-        "no (",
-        callback_data="5"
+    val_yes_button_4 = InlineKeyboardButton(
+        "yes ❤️",
+        callback_data="1"
     )
     val_no_button_5 = InlineKeyboardButton(
         "no (",
         callback_data="5"
     )
     markup.add(val_yes_button)
-    markup.add(val_no_button)
-    markup.add(val_no_button_2)
-    markup.add(val_no_button_3)
-    markup.add(val_no_button_4)
+    markup.add(val_yes_button_1)
+    markup.add(val_yes_button_2)
+    markup.add(val_yes_button_3)
+    markup.add(val_yes_button_4)
     markup.add(val_no_button_5)
     return markup
 
